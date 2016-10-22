@@ -50,14 +50,14 @@ static void 	print_map(t_map *map)
 	}
 }
 
-static t_map	*place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_point pos)
+static void  place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_point pos)
 {
-	t_map	*newmap;
+	//t_map	*newmap;
 	int		block;
 	//int i;
 	//int j;
 	
-	newmap = (t_map *)malloc(sizeof(t_map));
+	//newmap = (t_map *)malloc(sizeof(t_map));
 	/*
 	i = 0;
 	while (i < 24)
@@ -73,55 +73,72 @@ static t_map	*place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_
 	}
 	newmap->size = map->size;
 	*/
-	ft_memcpy(newmap, map, sizeof(t_map));
+	//ft_memcpy(newmap, map, sizeof(t_map));
 	block = 0;
 	printf("placing tet\n");														//debug
 	while (block < 16)
 	{
 		if ((32768 >> block) & tetri)
-			newmap->map[BLOCK_Y][BLOCK_X] = tet_i + 'A';
+			map->map[BLOCK_Y][BLOCK_X] = tet_i + 'A';
 		block++;
 	}
-	print_map(newmap);																	//debug
-	return (newmap);
+	//print_map(map);																	//debug
+	//return (map);
 }
 
-
-static t_map	*solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
+static void  remove_tet(t_map *map, unsigned short tetri, t_point pos)
 {
-	map->solved = 0;																	//debug
+  int   block;
+  
+  block = 0;
+  printf("placing tet\n");                            //debug
+  while (block < 16)
+  {
+    if ((32768 >> block) & tetri)
+      map->map[BLOCK_Y][BLOCK_X] = '.';
+    block++;
+  }
+  //print_map(map);                                 //debug
+  //return (map);
+}
+
+static int	solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
+{
+	//map->solved = 0;																	//debug
 	//return (map);															//debug
 	t_point pos;
-	t_map	*newmap;
+	//t_map	*newmap;
 	
 //	newmap = (t_map *)malloc(sizeof(t_map));
-	pos.y = 0;
-	while (pos.y < map->size && map->solved == 0 && newmap->solved == 0)
+	pos.y = -3;
+	while (pos.y < map->size/* && map->solved == 0 && newmap->solved == 0*/)
 	{
-		pos.x = 0;
-		while (pos.x < map->size && map->solved == 0 && newmap->solved == 0)
+		pos.x = -3;
+		while (pos.x < map->size/* && map->solved == 0 && newmap->solved == 0*/)
 		{
 			if (check_fit(tetriarr[tet_i], pos, map))
 			{
-				newmap = place_tet(map, tetriarr[tet_i], tet_i, pos);
+				place_tet(map, tetriarr[tet_i], tet_i, pos);
 				if (tetriarr[tet_i + 1])										//check if next tet exists
 				{
-					if (solve(newmap, tetriarr, tet_i + 1)->solved)
-						return (newmap);
-					free(newmap);
+					if (solve(map, tetriarr, tet_i + 1))
+						return (1);
+          else
+            remove_tet(map, tetriarr[tet_i], pos);
+					//free(newmap);
 				}
 				else
 				{
-					newmap->solved = 1;
+					map->solved = 1;
 					//map = place_tet(map, tetriarr[tet_i], tet_i, pos);
-					return (newmap);
+					return (1);
 				}
 			}
 			pos.x++;
 		}
 		pos.y++;
 	}
-	return (map);
+	return (0);
 }
 
 void          solve_map(unsigned short *tetriarr)
@@ -153,7 +170,7 @@ void          solve_map(unsigned short *tetriarr)
 	while(!map->solved)
 	{
 		(map->size)++;
-		map = solve(map, tetriarr, 0);
+		solve(map, tetriarr, 0);
 	}
 	// */
  	print_map(map);

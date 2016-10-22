@@ -89,17 +89,17 @@ static t_map	*place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_
 
 static t_map	*solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
 {
-	//map->solved = 1;																	//debug
+	map->solved = 0;																	//debug
 	//return (map);															//debug
 	t_point pos;
 	t_map	*newmap;
 	
 //	newmap = (t_map *)malloc(sizeof(t_map));
 	pos.y = 0;
-	while (pos.y < map->size)
+	while (pos.y < map->size && map->solved == 0 && newmap->solved == 0)
 	{
 		pos.x = 0;
-		while (pos.x < map->size)
+		while (pos.x < map->size && map->solved == 0 && newmap->solved == 0)
 		{
 			if (check_fit(tetriarr[tet_i], pos, map))
 			{
@@ -108,14 +108,14 @@ static t_map	*solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
 				{
 					if (solve(newmap, tetriarr, tet_i + 1)->solved)
 						return (newmap);
+					free(newmap);
 				}
 				else
 				{
-					map->solved = 1;
-					map = place_tet(map, tetriarr[tet_i], tet_i, pos);
-					return (map);
+					newmap->solved = 1;
+					//map = place_tet(map, tetriarr[tet_i], tet_i, pos);
+					return (newmap);
 				}
-				free(newmap);
 			}
 			pos.x++;
 		}

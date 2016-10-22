@@ -37,5 +37,6 @@ void			ft_bzero(void *s, size_t n);
 unsigned short	*convert(char *tetristr);
 unsigned int	ft_sqrt_ceil(unsigned int sq);
 void			solve_map(unsigned short *tetriarr);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

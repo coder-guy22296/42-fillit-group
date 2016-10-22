@@ -58,6 +58,8 @@ int	main(int argc, char **argv)
 			//printf("wrong format\n");																	///debug
 			return (1);
 		}
+		solve_map(convert(tetristr));
+
 	}
 
 	/*
@@ -70,6 +72,5 @@ int	main(int argc, char **argv)
 	// */
 	//write(1, argv[0], 9);																				///debug
 	//write(1, "\n", 1);																				///debug
-	solve_map(convert(tetristr));
 	return (0);
 }

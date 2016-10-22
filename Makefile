@@ -13,7 +13,7 @@
 NAME = fillit
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ./includes
-SRC = main.c validate.c convert.c solve.c ft_bzero.c ft_sqrt_ceil.c
+SRC = main.c validate.c convert.c solve.c ft_bzero.c ft_sqrt_ceil.c ft_memcpy.c
 
 .PHONY: all clean fclean re test
 	
@@ -33,3 +33,5 @@ fclean: clean
 re: fclean all
 
 
+test:
+	$(CC) -o $(NAME) $(SRC) $(CFLAGS) -fsanitize=address

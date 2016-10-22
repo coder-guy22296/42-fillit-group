@@ -82,7 +82,7 @@ static void  place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_p
 			map->map[BLOCK_Y][BLOCK_X] = tet_i + 'A';
 		block++;
 	}
-	//print_map(map);																	//debug
+	print_map(map);																	//debug
 	//return (map);
 }
 
@@ -165,12 +165,11 @@ void          solve_map(unsigned short *tetriarr)
 	tetri_ct = 0;
 	while (tetriarr[tetri_ct])
 		tetri_ct++;
-	map->size = ft_sqrt_ceil(tetri_ct * 4) - 1;
+	map->size = ft_sqrt_ceil(tetri_ct * 4);
 	map->solved = 0;
-	while(!map->solved)
+	while(!solve(map, tetriarr, 0))
 	{
 		(map->size)++;
-		solve(map, tetriarr, 0);
 	}
 	// */
  	print_map(map);

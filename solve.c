@@ -54,10 +54,11 @@ static t_map	*place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_
 {
 	t_map	*newmap;
 	int		block;
-	int i;
-	int j;
+	//int i;
+	//int j;
 	
 	newmap = (t_map *)malloc(sizeof(t_map));
+	/*
 	i = 0;
 	while (i < 24)
 	{
@@ -71,7 +72,8 @@ static t_map	*place_tet(t_map *map, unsigned short tetri, unsigned int tet_i, t_
 		i++;
 	}
 	newmap->size = map->size;
-	//ft_memcpy(newmap, map, sizeof(t_map));
+	*/
+	ft_memcpy(newmap, map, sizeof(t_map));
 	block = 0;
 	printf("placing tet\n");														//debug
 	while (block < 16)

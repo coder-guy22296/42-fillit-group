@@ -6,7 +6,7 @@
 /*   By: pvan-erp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:14:03 by pvan-erp          #+#    #+#             */
-/*   Updated: 2016/10/21 15:57:12 by pvan-erp         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:25:58 by pvan-erp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 **	valid files are always (some multiple of 21) - 1
 */
 
-int	has_adjacent(char *tetri, unsigned int i)
+static int	has_adjacent(char *tetri, unsigned int i)
 {
 	return ((i > 0 && tetri[i - 1] == '#') || (i < 19 && tetri[i + 1] == '#')
 		|| (i > 4 && tetri[i - 5] == '#') || (i < 14 && tetri[i + 5] == '#'));
 }
 
-int	is_tetri(char *tetri)
+static int	is_tetri(char *tetri)
 {
 	unsigned int	blocks;
 	unsigned int	i;
@@ -51,7 +51,7 @@ int	is_tetri(char *tetri)
 	return (1);
 }
 
-int	is_valid(char *tetristr)
+int			is_valid(char *tetristr)
 {
 	unsigned short	i;
 

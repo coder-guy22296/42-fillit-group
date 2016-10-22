@@ -1,8 +1,6 @@
 #include "fillit.h"
-#define SOLVED 1
-#define UNSOLVED 0
 
-int check_fit(short tetri, t_point pos, t_map *map)
+static int check_fit(short tetri, t_point pos, t_map *map)
 {
 	int tetripos;
 	
@@ -23,7 +21,7 @@ int check_fit(short tetri, t_point pos, t_map *map)
 
 }
 
-t_map	*place_tet(t_map *map, unsigned short *tetriarr, unsigned int tet_i, t_point pos)
+static t_map	*place_tet(t_map *map, unsigned short *tetriarr, unsigned int tet_i, t_point pos)
 {
 	map->solved = 1;												//debug
 	tetriarr = NULL;												//debug
@@ -34,26 +32,12 @@ t_map	*place_tet(t_map *map, unsigned short *tetriarr, unsigned int tet_i, t_poi
 	return (map);
 }
 
-void	print_map(t_map *map)
+static void	print_map(t_map *map)
 {
 	map = NULL;																								//debug
 }
 
-void	solve_map(unsigned short *tetriarr)
-{
-  	t_map	*map;
-  	
-  	map = (t_map *)malloc(sizeof(t_map));
- 	map->size = 2;
-  	while(!map->solved)
-    {
-      	solve(map, tetriarr, 0);
-      	map->size++;
-    }
-	print_map(map);
-}
-
-t_map *solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
+static t_map *solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
 {
   	t_point pos;
   	t_map	*newmap;
@@ -84,6 +68,20 @@ t_map *solve(t_map *map, unsigned short *tetriarr, unsigned int tet_i)
       	pos.y++;
 	}
   	return (map);
+}
+
+void          solve_map(unsigned short *tetriarr)
+{
+    t_map *map;
+    
+    map = (t_map *)malloc(sizeof(t_map));
+  map->size = 2;
+    while(!map->solved)
+    {
+        solve(map, tetriarr, 0);
+        map->size++;
+    }
+  print_map(map);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

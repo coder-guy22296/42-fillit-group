@@ -6,7 +6,7 @@
 /*   By: pvan-erp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:57:44 by pvan-erp          #+#    #+#             */
-/*   Updated: 2016/10/21 16:00:14 by pvan-erp         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:15:50 by pvan-erp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,5 @@ void			ft_bzero(void *s, size_t n);
 unsigned short	*convert(char *tetristr);
 unsigned int	ft_sqrt_ceil(unsigned int sq);
 void			solve_map(unsigned short *tetriarr);
-t_map			*solve(t_map *map, unsigned short *tetriarr,
-	unsigned int tet_i);
 
 #endif

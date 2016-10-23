@@ -6,11 +6,13 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 21:58:28 by cyildiri          #+#    #+#             */
-/*   Updated: 2016/10/21 21:58:30 by cyildiri         ###   ########.fr       */
+/*   Updated: 2016/10/22 16:23:29 by pvan-erp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void print_map(t_map *map)
+#include "fillit.h"
+
+void	print_map(t_map *map)
 {
 	int x;
 	int y;

@@ -6,7 +6,7 @@
 /*   By: pvan-erp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:57:44 by pvan-erp          #+#    #+#             */
-/*   Updated: 2016/10/21 16:15:50 by pvan-erp         ###   ########.fr       */
+/*   Updated: 2016/10/22 16:24:28 by pvan-erp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct	s_map
 {
 	int		size;
-	int		solved;
 	char	map[24][24];
 }				t_map;
 
@@ -37,6 +36,7 @@ void			ft_bzero(void *s, size_t n);
 unsigned short	*convert(char *tetristr);
 unsigned int	ft_sqrt_ceil(unsigned int sq);
 void			solve_map(unsigned short *tetriarr);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			print_map(t_map *map);
 
 #endif

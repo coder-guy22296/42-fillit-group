@@ -6,7 +6,7 @@
 /*   By: pvan-erp <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 16:14:03 by pvan-erp          #+#    #+#             */
-/*   Updated: 2016/10/21 19:25:58 by pvan-erp         ###   ########.fr       */
+/*   Updated: 2016/10/22 23:04:36 by pvan-erp         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,30 @@
 **	valid files are always (some multiple of 21) - 1
 */
 
-static int	has_adjacent(char *tetri, unsigned int i)
+static int	get_adjacent(char *tetri, unsigned int i)
 {
-	return ((i > 0 && tetri[i - 1] == '#') || (i < 19 && tetri[i + 1] == '#')
-		|| (i > 4 && tetri[i - 5] == '#') || (i < 14 && tetri[i + 5] == '#'));
+	unsigned int	adjacent;
+
+	adjacent = 0;
+	if (i > 0 && tetri[i - 1] == '#')
+		adjacent++;
+	if (i < 19 && tetri[i + 1] == '#')
+		adjacent++;
+	if (i > 4 && tetri[i - 5] == '#')
+		adjacent++;
+	if (i < 14 && tetri[i + 5] == '#')
+		adjacent++;
+	return (adjacent);
 }
 
 static int	is_tetri(char *tetri)
 {
 	unsigned int	blocks;
+	unsigned int	adjacent;
 	unsigned int	i;
 
 	blocks = 0;
+	adjacent = 0;
 	i = ~0;
 	while (++i < 20)
 	{
@@ -40,13 +52,12 @@ static int	is_tetri(char *tetri)
 		else if (tetri[i] == '#')
 		{
 			blocks++;
-			if (!has_adjacent(tetri, i))
-				return (0);
+			adjacent += get_adjacent(tetri, i);
 		}
 		else if (tetri[i] != '.')
 			return (0);
 	}
-	if (blocks != 4)
+	if (blocks != 4 || adjacent < 6)
 		return (0);
 	return (1);
 }
